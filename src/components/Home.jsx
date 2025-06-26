@@ -84,6 +84,34 @@ function Home() {
           </button>
         </form>
       </div>
+        {/* Search Results */}
+      {movies.length > 0 && (
+        <section className="px-6 pb-12">
+          <h2 className="text-2xl font-semibold text-indigo-300 mb-4">🎯 Search Results</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
+            {movies.map((movie) => (
+              <div
+                key={movie.id}
+                onClick={() => navigate(`/watch/${movie.id}`)}
+                className="cursor-pointer bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
+              >
+                {movie.poster_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    className="w-full h-72 object-contain"
+                  />
+                ) : (
+                  <div className="w-full h-72 bg-gray-600 flex items-center justify-center text-white text-xl">
+                    No Image
+                  </div>
+                )}
+                <h3 className="text-center p-2 font-semibold text-sm md:text-lg">{movie.title}</h3>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Trending Movies Section */}
       {trending.length > 0 && (
@@ -114,34 +142,7 @@ function Home() {
         </section>
       )}
 
-      {/* Search Results */}
-      {movies.length > 0 && (
-        <section className="px-6 pb-12">
-          <h2 className="text-2xl font-semibold text-indigo-300 mb-4">🎯 Search Results</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-            {movies.map((movie) => (
-              <div
-                key={movie.id}
-                onClick={() => navigate(`/watch/${movie.id}`)}
-                className="cursor-pointer bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
-              >
-                {movie.poster_path ? (
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                    alt={movie.title}
-                    className="w-full h-72 object-contain"
-                  />
-                ) : (
-                  <div className="w-full h-72 bg-gray-600 flex items-center justify-center text-white text-xl">
-                    No Image
-                  </div>
-                )}
-                <h3 className="text-center p-2 font-semibold text-sm md:text-lg">{movie.title}</h3>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
+    
     </div>
   );
 }
